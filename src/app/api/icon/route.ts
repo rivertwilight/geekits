@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as MuiIcons from "@mui/icons-material";
 import sharp from "sharp";
-import { renderToStaticMarkup } from "react-dom/server";
-import React from "react";
 
 // Check all supported icons at https://mui.com/material-ui/material-icons/
 export async function GET(request: NextRequest) {
@@ -31,12 +29,11 @@ export async function GET(request: NextRequest) {
 			);
 		}
 
-		const svgString = renderToStaticMarkup(
-			React.createElement(IconComponent, {
-				viewBox: "0 0 24 24",
-				style: { color: `#${iconColor}` },
-			})
-		);
+		// Extract SVG path from MUI icon component
+		// MUI icons expose their path data through the default props
+		const iconElement = IconComponent({});
+		const svgPath = iconElement?.props?.children || "";
+		const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#${iconColor}">${svgPath}</svg>`;
 
 		let backgroundFill: string;
 
