@@ -22,13 +22,11 @@ import { useLocale } from "@/contexts/locale";
 
 const Shortcuts = ({ kwd }: { kwd: string }) => {
 	return (
-		<List>
-			<Link
-				legacyBehavior
-				href={"https://www.google.com/search?q=" + kwd}
-				passHref
-			>
-				<ListItem>
+        <List>
+            <Link href={"https://www.google.com/search?q=" + kwd}>
+                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                }
+                <ListItem>
 					<ListItemButton>
 						<ListItemIcon>
 							<GoogleIcon />
@@ -36,13 +34,11 @@ const Shortcuts = ({ kwd }: { kwd: string }) => {
 						<ListItemText primary={`使用谷歌搜索"${kwd}"`} />
 					</ListItemButton>
 				</ListItem>
-			</Link>
-			<Link
-				legacyBehavior
-				href={"https://cn.bing.com/search?q=" + kwd}
-				passHref
-			>
-				<ListItem>
+            </Link>
+            <Link href={"https://cn.bing.com/search?q=" + kwd}>
+                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                }
+                <ListItem>
 					<ListItemButton>
 						<ListItemIcon>
 							<SearchSharpIcon />
@@ -50,13 +46,11 @@ const Shortcuts = ({ kwd }: { kwd: string }) => {
 						<ListItemText primary={`使用必应搜索"${kwd}"`} />
 					</ListItemButton>
 				</ListItem>
-			</Link>
-			<Link
-				legacyBehavior
-				href={"https://www.baidu.com/#ie=UTF-8&wd=" + kwd}
-				passHref
-			>
-				<ListItem>
+            </Link>
+            <Link href={"https://www.baidu.com/#ie=UTF-8&wd=" + kwd}>
+                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                }
+                <ListItem>
 					<ListItemButton>
 						<ListItemIcon>
 							<SearchSharpIcon />
@@ -64,9 +58,9 @@ const Shortcuts = ({ kwd }: { kwd: string }) => {
 						<ListItemText primary={`使用百度搜索"${kwd}"`} />
 					</ListItemButton>
 				</ListItem>
-			</Link>
-		</List>
-	);
+            </Link>
+        </List>
+    );
 };
 
 const SearchResult = ({ result = [], kwd }: any) => {

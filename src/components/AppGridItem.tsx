@@ -87,7 +87,9 @@ const AppGridItem = ({
   }
 
   return (
-    <Link {...attr} passHref legacyBehavior style={{ height: '100%', display: 'flex' }}>
+    <Link {...attr} style={{ height: '100%', display: 'flex' }}>
+      {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+      }
       <OutlinedCard sx={{ height: '100%', display: 'flex' }}>
         <Inner />
       </OutlinedCard>

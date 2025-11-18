@@ -43,13 +43,15 @@ export async function getStaticProps({ locale }) {
 
 const LinkList = function ({ link, Icon, primary, secondary }) {
 	return (
-		<Link key={link} href={link} passHref legacyBehavior>
-			<ListItem component={"a"} button>
+        <Link key={link} href={link}>
+            {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+            }
+            <ListItem component={"a"} button>
 				{Icon && <ListItemIcon>{Icon}</ListItemIcon>}
 				<ListItemText secondary={secondary} primary={primary} />
 			</ListItem>
-		</Link>
-	);
+        </Link>
+    );
 };
 
 interface ISetting {

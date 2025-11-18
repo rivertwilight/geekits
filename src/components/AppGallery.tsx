@@ -136,13 +136,10 @@ const AppListItem = ({
 	}
 
 	return (
-		<Link
-			{...attr}
-			passHref
-			style={{ textDecoration: "none" }}
-			legacyBehavior
-		>
-			<Card
+        <Link {...attr} style={{ textDecoration: "none" }}>
+            {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+            }
+            <Card
 				sx={{
 					textDecoration: "none",
 					"&:hover": {
@@ -152,8 +149,8 @@ const AppListItem = ({
 			>
 				<Inner />
 			</Card>
-		</Link>
-	);
+        </Link>
+    );
 };
 
 const Channel = ({

@@ -34,9 +34,11 @@ export default function Custom404() {
 				想要的工具不见了？返回首页找找吧！
 			</Typography>
             <br />
-            <Link href="/" legacyBehavior>
-				<Button variant="outlined">返回首页</Button>
-			</Link>
+            <Link href="/">
+                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                }
+                <Button variant="outlined">返回首页</Button>
+            </Link>
         </div>
     );
 }

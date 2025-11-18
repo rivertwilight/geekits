@@ -101,20 +101,21 @@ export default class extends React.Component<{}, ComponentState> {
 							</i>
 						</li>
 
-						<Link to="sync" className="mdui-list-item mdui-ripple" legacyBehavior>
-							<i className="mdui-list-item-icon mdui-icon material-icons mdui-text-color-yellow">
+						<Link to="sync" className="mdui-list-item mdui-ripple">
+                            {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                            }
+                            <i className="mdui-list-item-icon mdui-icon material-icons mdui-text-color-yellow">
 								star
 							</i>
-
-							<div className="mdui-list-item-content">
+                            <div className="mdui-list-item-content">
 								<div className="mdui-list-item-title">
 									收藏同步
 								</div>
 							</div>
-							<i className="mdui-list-item-icon mdui-icon material-icons">
+                            <i className="mdui-list-item-icon mdui-icon material-icons">
 								chevron_right
 							</i>
-						</Link>
+                        </Link>
 					</ul>
 					<button
 						onClick={(_) => {

@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -55,18 +57,17 @@ const LinkWrapper = ({
 		return <Divider sx={{ marginY: 1 }} />;
 	}
 
-	const router = useRouter();
+	const pathname = usePathname();
 
 	return (
-		<Link
-			href={href}
-			passHref
-			legacyBehavior
-			target={isExternal ? "_blank" : undefined}
-			style={{ textDecoration: "none", color: "inherit" }}
-			{...props}
-		>
-			<ListItemButton
+        <Link
+            href={href}
+            target={isExternal ? "_blank" : undefined}
+            style={{ textDecoration: "none", color: "inherit" }}
+            {...props}>
+            {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+            }
+            <ListItemButton
 				onClick={handleClick}
 				sx={{
 					"&.Mui-selected .MuiListItemText-primary": {
@@ -83,7 +84,7 @@ const LinkWrapper = ({
 					},
 					...sx,
 				}}
-				className={router.pathname == href ? "Mui-selected" : ""}
+				className={pathname == href ? "Mui-selected" : ""}
 				key={href}
 			>
 				<ListItemIcon>{Icon}</ListItemIcon>
@@ -102,8 +103,8 @@ const LinkWrapper = ({
 					/>
 				)}
 			</ListItemButton>
-		</Link>
-	);
+        </Link>
+    );
 };
 
 const Sidebar = () => {
