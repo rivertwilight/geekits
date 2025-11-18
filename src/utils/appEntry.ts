@@ -109,9 +109,6 @@ const appImportList: Record<string, ComponentType> = {
 	mimetype: dynamic(() => import("../apps/mimetype"), {
 		ssr: false,
 	}),
-	manifest: dynamic(() => import("../apps/manifest"), {
-		ssr: false,
-	}),
 	html2jsx: dynamic(() => import("../apps/html2jsx"), {
 		ssr: false,
 	}),
