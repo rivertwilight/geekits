@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function TermsPage() {
-	const dic = require("../../data/i18n.json");
+	const dic = require("../../../data/i18n.json");
 
 	const currentPage = {
 		title: "使用条款",
