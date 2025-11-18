@@ -1,41 +1,72 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"module": "commonjs",
-		"strict": false,
-		"noImplicitAny": false,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true,
-		"baseUrl": ".",
-		"paths": {
-			"@/components/*": ["src/components/*"],
-			"@/contexts/*": ["src/contexts/*"],
-			"@/data/*": ["src/data/*"],
-			"@/apps/*": ["src/apps/*"],
-			"@/types/*": ["types/*"],
-			"@/utils/*": ["src/utils/*"],
-			"@/hooks/*": ["src/hooks/*"],
-			"@/packages/*": ["packages/*"],
-			"react": ["./node_modules/@types/react"]
-		},
-		"experimentalDecorators": true
-	},
-	"exclude": ["node_modules"],
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		"types/index.d,ts",
-		"src/apps/jyutping_converter/convertDic.js",
-		"src/apps/jyutping_converter/convertDic.s"
-	]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "strict": false,
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/contexts/*": [
+        "src/contexts/*"
+      ],
+      "@/data/*": [
+        "src/data/*"
+      ],
+      "@/apps/*": [
+        "src/apps/*"
+      ],
+      "@/types/*": [
+        "types/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
+      ],
+      "@/packages/*": [
+        "packages/*"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ]
+    },
+    "experimentalDecorators": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "src/apps/jyutping_converter/convertDic.js",
+    "src/apps/jyutping_converter/convertDic.s",
+    "types/index.d,ts",
+    ".next/types/**/*.ts"
+  ]
 }

@@ -1,0 +1,92 @@
+@font-face {
+	font-family: "Product Sans Bold";
+	src: url(/font/Product-Sans-Bold.ttf);
+}
+
+@font-face {
+	font-family: "Product Sans";
+	src: url(/font/Product-Sans-Regular.ttf);
+}
+
+html {
+	--ion-safe-area-top: env(safe-area-inset-top);
+	--ion-safe-area-bottom: env(safe-area-inset-bottom);
+	--ion-safe-area-left: env(safe-area-inset-left);
+	--ion-safe-area-right: env(safe-area-inset-right);
+}
+
+.Textc\(green\) {
+	color: #4caf50;
+}
+
+/**  shaking text animation */
+@keyframes shake {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.shakingText {
+	transition: opacticy 0.5s ease-in-out;
+	animation: shake 1.5s;
+	animation-iteration-count: infinite;
+}
+@keyframes progress {
+	from {
+		stroke-dashoffset: 630;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+.mask {
+	cursor: row-resize;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.6);
+	left: 0;
+	right: 0;
+	touch-action: none;
+}
+
+.mask-top {
+	top: 0;
+	border-bottom: 5px solid #177b1f;
+}
+
+.mask-bottom {
+	border-top: 5px solid #177b1f;
+	bottom: 0;
+}
+
+/* Add these styles to hide scrollbar track background and border */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+	border: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: rgba(156, 163, 175, 0.5);
+	border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* For Firefox */
+.custom-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+	scrollbar-gutter: stable;
+}

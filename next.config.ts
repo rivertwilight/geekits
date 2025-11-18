@@ -4,12 +4,6 @@ const isCapacitorBuildtime = process.env.CAPACITOR_BUILD === "true";
 
 const nextConfig: NextConfig = {
 	...(isCapacitorBuildtime && { output: "export" }),
-	...(!isCapacitorBuildtime && {
-		i18n: {
-			locales: ["zh-CN", "en-US"],
-			defaultLocale: "en-US",
-		},
-	}),
 	typescript: {
 		// !! WARN !!
 		// Dangerously allow production builds to successfully complete even if

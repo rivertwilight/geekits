@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, lazy, Suspense } from "react";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
@@ -16,7 +18,7 @@ import Link from "next/link";
 import { Theme, useMediaQuery, Grid, Chip, Tooltip } from "@mui/material";
 import { useSidebar } from "@/contexts/sidebar";
 import siteConfig from "src/site.config";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { isWeb } from "@/utils/platform";
 import Text from "./i18n";
@@ -47,7 +49,7 @@ interface Props {
 function AppsMenu() {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [hoverDescription, setHoverDescription] = useState<string>(
-		"Discover more apps from YGeeker"
+		"Discover more apps from YGeeker",
 	);
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -215,11 +217,11 @@ export default (props: {
 	const { sidebar, setSidebar } = useSidebar();
 	const [showLoginDialog, setShowLoginDialog] = useState(false);
 	const hidden = useMediaQuery((theme: Theme) =>
-		theme.breakpoints.down("sm")
+		theme.breakpoints.down("sm"),
 	);
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only("xs"));
-	const router = useRouter();
-	const isRootRoute = router.pathname === "/";
+	const pathname = usePathname();
+	const isRootRoute = pathname === "/";
 
 	const [showGetAppChip, setShowGetAppChip] = useState(true);
 
@@ -327,7 +329,7 @@ export default (props: {
 									onClick={() => {
 										window.open(
 											"https://www.ygeeker.com/geekits",
-											"_blank"
+											"_blank",
 										);
 									}}
 								/>

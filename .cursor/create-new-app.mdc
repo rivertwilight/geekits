@@ -8,13 +8,13 @@ alwaysApply: false
 
 ## Step 1
 
-Create a new folder with `index.tsx` in the `src/apps` directory, write the logic there. You need a unique slug for the app, which is used as the app id, such as `color_picker`.
+Create a new folder with `index.tsx` in the `src/apps/<id>` directory, write the logic there. You need a unique slug for the app, which is used as the app id, such as `color_picker`.
 
 You need use MUI v7. And you can find some pre-built components in the `src/components` directory if needed.
 
 ## Step 2
 
-Create a new file with `README.en-US.md` in the `src/apps` directory, write the README for the new app. Use frontmatter to define the app's metadata.
+Create a new file with `README.en-US.md` in the `src/apps/<id>` directory, write the README for the new app. Use frontmatter to define the app's metadata.
 
 Don't forget to add a SEO-friendly description and keywords.
 
@@ -53,3 +53,7 @@ When choosing icon, you have two options:
 2. Use our dynamically generated icon API: `src/pages/api/icon.ts`
 
 Also add a README.zh-CN.md file then.
+
+## Step 3
+
+You are all set. Try build with NextJS to test.

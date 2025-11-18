@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { FC, useCallback, useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { HelpOutlineTwoTone } from "@mui/icons-material";
 import { useAction } from "@/contexts/action";
 import { useAppBar } from "@/contexts/appBar";
@@ -6,17 +9,14 @@ import { useLocale } from "@/contexts/locale";
 import AppMenu from "@/components/AppMenu";
 import IconButton from "@mui/material/IconButton";
 import RightDrawer from "@/components/RightDrawer";
-import { FC, useCallback, useEffect, useState } from "react";
-import { GetStaticProps } from "next";
-import { isCapacitor, isWeb } from "@/utils/platform";
-import { defaultLocale } from "src/site.config";
+import { isWeb } from "@/utils/platform";
 import { styled } from "@mui/material/styles";
 import appImportList from "@/utils/appEntry";
-import { getAppConfig, getAppDoc } from "@/utils/appData";
-import getPaths from "@/utils/getPaths";
+import { getAppConfig } from "@/utils/appData";
 import { store as frameStore } from "@/utils/Data/frameState";
-import generateSitemap from "@/utils/generateSitemap";
-import { useRouter } from "next/router";
+import Text from "@/components/i18n";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Layout from "@/components/Layout";
 
 const drawerWidth: number = 260;
 
@@ -32,17 +32,14 @@ const Root = styled("div")<{ freeSize?: boolean }>(
 		({ freeSize }) => ({
 			width: "100%",
 			height: "100vh",
-			paddingTop: "65px", // 65px is the height of the header, plus some padding
+			paddingTop: "65px",
 			[theme.breakpoints.up("sm")]: {
 				paddingBottom: "8px",
 			},
 			[`& .${classes.content}`]: {
 				height: "100%",
 				overflowY: "auto",
-				// width: "100%",
 				[theme.breakpoints.up("sm")]: {
-					// When sidebar is not open, give it a same right margin as
-					// the bottom margin.
 					marginRight: "8px",
 					borderRadius: "24px",
 				},
@@ -68,73 +65,6 @@ const Root = styled("div")<{ freeSize?: boolean }>(
 		})
 );
 
-export async function getStaticPaths() {
-	if (isCapacitor()) {
-		return {
-			paths: getPaths(),
-			fallback: false,
-		};
-	}
-
-	const paths = ["zh-CN", "en-US"].map((locale) => getPaths(locale)).flat(1);
-
-	generateSitemap(
-		paths.map((p) => {
-			return {
-				url: `/app/` + p.params.id,
-				changefreq: "monthly",
-				priority: 0.7,
-			};
-		})
-	);
-
-	return {
-		paths,
-		fallback: false,
-	};
-}
-
-export const getStaticProps: GetStaticProps = ({
-	locale = defaultLocale,
-	...ctx
-}) => {
-	const { id: currentId } = ctx.params;
-
-	const appConfig = getAppConfig(currentId as string, {
-		requiredKeys: [
-			"name",
-			"seoOptimizedDescription",
-			"status",
-			"freeSize",
-			"platform",
-			"keywords",
-		],
-		locale: locale,
-	});
-
-	const appDoc = getAppDoc(currentId as string);
-
-	const dic = require("../../data/i18n.json");
-
-	return {
-		props: {
-			currentPage: {
-				title: appConfig.name,
-				keywords: appConfig.keywords,
-				description:
-					appConfig.seoOptimizedDescription ||
-					appConfig.description ||
-					"",
-				path: "/app/" + appConfig.id,
-			},
-			dic: JSON.stringify(dic),
-			appConfig,
-			locale,
-			appDoc,
-		},
-	};
-};
-
 const SidebarToggle = ({ handleToggle }) => {
 	return (
 		<IconButton
@@ -147,7 +77,6 @@ const SidebarToggle = ({ handleToggle }) => {
 	);
 };
 
-// ?
 class ErrorBoundary extends React.Component {
 	constructor(props) {
 		super(props);
@@ -175,18 +104,28 @@ class ErrorBoundary extends React.Component {
 	}
 }
 
-/**
- * Universal App Container
- */
-const AppContainer = ({ appConfig, appDoc }) => {
+export default function AppContainerClient({
+	appConfig: initialAppConfig,
+	appDoc,
+	currentPage,
+	dic,
+}: {
+	appConfig: any;
+	appDoc: any;
+	currentPage: any;
+	dic: string;
+}) {
 	const [FeedbackComp, setFeedbackComp] = useState(null);
 	const [showFeedbackComp, setShowFeedbackComp] = useState(false);
+	const [appConfig, setAppConfig] = useState(initialAppConfig);
+	const [framed, setFramed] = useState<Boolean>(true);
 
 	const { setAction } = useAction();
 	const { appBar, setAppBar } = useAppBar();
-	const { locale } = useLocale();
-	const router = useRouter();
-	const { id } = router.query;
+	const { locale: activeLocale } = useLocale();
+	const params = useParams();
+	const id = params.id as string;
+
 	const loadLink =
 		appConfig.status === "stable" || appConfig.status === "beta"
 			? appConfig.id
@@ -209,9 +148,16 @@ const AppContainer = ({ appConfig, appDoc }) => {
 	}, []);
 
 	useEffect(() => {
+		const unsubscribe = frameStore.subscribe(() =>
+			setFramed(frameStore.getState().value)
+		);
+		return () => unsubscribe();
+	}, []);
+
+	useEffect(() => {
 		if (!isWeb()) {
 			const localTitle = document.querySelector("#navbar-localTitle");
-			const localizedAppConfig = getAppConfig(id as string, {
+			const localizedAppConfig = getAppConfig(id, {
 				requiredKeys: [
 					"name",
 					"seoOptimizedDescription",
@@ -219,12 +165,14 @@ const AppContainer = ({ appConfig, appDoc }) => {
 					"freeSize",
 					"platform",
 				],
-				locale: locale,
+				locale: activeLocale,
 			});
-			appConfig = localizedAppConfig;
-			localTitle.textContent = appConfig.name;
+			setAppConfig(localizedAppConfig);
+			if (localTitle) {
+				localTitle.textContent = localizedAppConfig.name;
+			}
 		}
-	}, [locale, id]);
+	}, [activeLocale, id]);
 
 	const feedback = useCallback(() => {
 		if (!FeedbackComp) {
@@ -236,24 +184,36 @@ const AppContainer = ({ appConfig, appDoc }) => {
 		setShowFeedbackComp(true);
 	}, [FeedbackComp]);
 
-	return (
-		<Root freeSize={!!appConfig.freeSize}>
-			<div
-				className={`${classes.content} ${
-					appBar ? classes.contentShift : ""
-				} custom-scrollbar`}
-			>
-				<ErrorBoundary>{AppComp && <AppComp />}</ErrorBoundary>
-			</div>
-			<RightDrawer onClose={() => setAppBar(!appBar)} open={appBar}>
-				<AppMenu
-					appDoc={appDoc[locale]}
-					feedback={feedback}
-					appConfig={appConfig}
-				/>
-			</RightDrawer>
-		</Root>
+	const localizedDic = React.useMemo(
+		() => JSON.parse(dic)[activeLocale],
+		[activeLocale, dic]
 	);
-};
 
-export default AppContainer;
+	return (
+		<Text dictionary={localizedDic || {}} language={activeLocale}>
+			<Layout appData={[]} currentPage={currentPage} enableFrame={framed}>
+				<Root freeSize={!!appConfig.freeSize}>
+					<div
+						className={`${classes.content} ${
+							appBar ? classes.contentShift : ""
+						} custom-scrollbar`}
+					>
+						<ErrorBoundary>{AppComp && <AppComp />}</ErrorBoundary>
+					</div>
+					<RightDrawer onClose={() => setAppBar(!appBar)} open={appBar}>
+						<AppMenu
+							appDoc={appDoc[activeLocale]}
+							feedback={feedback}
+							appConfig={appConfig}
+						/>
+					</RightDrawer>
+				</Root>
+			</Layout>
+			{process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
+				<GoogleAnalytics
+					ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
+				/>
+			)}
+		</Text>
+	);
+}
