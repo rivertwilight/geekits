@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function DonatePage() {
-	const dic = require("../../../data/i18n.json");
+	const dic = require("../../../../data/i18n.json");
 
 	const currentPage = {
 		title: "捐赠",
