@@ -45,8 +45,6 @@ export async function GET(request: NextRequest) {
 			`<svg$1 fill="#${iconColor}">`
 		);
 
-		const svgString = svgContent;
-
 		let backgroundFill: string;
 
 		if (backgroundColor1 && backgroundColor2) {
