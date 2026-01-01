@@ -1,4 +1,4 @@
-import { getAllApps } from "./appData";
+import { getAllApps } from "./appData.server";
 
 export default (locale?: string, processId?: (id: string) => string) => {
 	const allApps = getAllApps(false);

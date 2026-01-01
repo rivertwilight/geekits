@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata, ResolvingMetadata } from "next";
-import { getAllApps } from "@/utils/appData";
+import { getAllApps } from "@/utils/appData.server";
 import { defaultLocale } from "../../site.config";
 import translator from "@/utils/translator";
 import HomePageClient from "./page-client";

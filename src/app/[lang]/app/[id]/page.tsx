@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { isCapacitor } from "@/utils/platform";
 import { defaultLocale } from "src/site.config";
-import { getAppConfig, getAppDoc } from "@/utils/appData";
+import { getAppConfig, getAppDoc } from "@/utils/appData.server";
 import getPaths from "@/utils/getPaths";
 import AppContainerClient from "./page-client";
 

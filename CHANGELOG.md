@@ -1,3 +1,7 @@
+## 2.3.2
+
+-   refac: Migrate to App router
+
 ## 2.3.1 (2025-01-23)
 
 -   feat: Add lottery app
