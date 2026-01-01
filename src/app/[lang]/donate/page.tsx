@@ -4,7 +4,7 @@ import translator from "@/utils/translator";
 import { defaultLocale } from "../../../site.config";
 
 export async function generateMetadata(): Promise<Metadata> {
-	const dic = require("../../data/i18n.json");
+	const dic = require("../../../data/i18n.json");
 	const trans = new translator(dic, defaultLocale);
 
 	return {
@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function DonatePage() {
-	const dic = require("../../../../data/i18n.json");
+	const dic = require("../../../data/i18n.json");
 
 	const currentPage = {
 		title: "捐赠",
