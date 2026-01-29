@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import { isCapacitor } from "@/utils/platform";
 import { defaultLocale } from "src/site.config";
