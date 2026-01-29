@@ -14,13 +14,14 @@ function getLocale(request) {
 
 	// Fall back to accept-language header
 	const headers = {
-		"accept-language": request.headers.get("accept-language") || DEFAULT_LOCALE,
+		"accept-language":
+			request.headers.get("accept-language") || DEFAULT_LOCALE,
 	};
 	const languages = new Negotiator({ headers }).languages();
 	return match(languages, AVAILABLE_LOCALES, DEFAULT_LOCALE);
 }
 
-export async function middleware(request) {
+export async function proxy(request) {
 	const { pathname } = request.nextUrl;
 
 	const pathnameHasLocale = AVAILABLE_LOCALES.some(
