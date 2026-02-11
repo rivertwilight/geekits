@@ -1,7 +1,7 @@
 {
-	"name": "geekits",
-	"version": "2.3.4",
-	"homepage": "https://geekits.ygeeker.com",
+	"name": "toolkits",
+	"version": "3.0.0",
+	"homepage": "https://tlkts.com",
 	"description": "🛠A simple, feature-rich, and efficient online toolbox | 极简，强大，高效的在线工具箱，遵循MD设计规范",
 	"packageManager": "pnpm@9.15.4",
 	"scripts": {
