@@ -72,7 +72,7 @@ export default function FeedbackClient({
 
 		const apiUrl = isWeb()
 			? "/api/feedback"
-			: "https://geekits.ygeeker.com/api/feedback";
+			: "https://tlkts.com/api/feedback";
 
 		axios
 			.post(apiUrl, feedbackData)

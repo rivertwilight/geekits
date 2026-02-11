@@ -15,10 +15,10 @@ module.exports = {
 		twitter: "https://x.com/rea1DonandTrump",
 	},
 	repo: "https://github.com/rivertwilight/toolkits",
-	root: "https://geekits.ygeeker.com",
+	root: "https://tlkts.com",
 	releaseNotesUrl: "https://www.ygeeker.com/support/geekits/release-notes",
 	apiConfig: {
-		url: "https://geekits.ygeeker.com",
+		url: "https://tlkts.com",
 	},
 	appstore: {
 		appId: "6480398974",
