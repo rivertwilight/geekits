@@ -131,9 +131,9 @@ const Sidebar = () => {
 		theme.breakpoints.down("md"),
 	);
 
-	const [bookmarks, setBookmarks] = useState<{ link: string; name: string }[]>(
-		[],
-	);
+	const [bookmarks, setBookmarks] = useState<
+		{ link: string; name: string }[]
+	>([]);
 
 	useEffect(() => {
 		setBookmarks(fiv.getAll());
@@ -237,7 +237,7 @@ const Sidebar = () => {
 			<Box alignSelf="stretch">
 				<List sx={{ cursor: "pointer" }}>
 					<a
-						href="https://www.ygeeker.com"
+						href="https://rene.wang"
 						style={{ textDecoration: "none", color: "inherit" }}
 					>
 						<ListItem
@@ -246,27 +246,12 @@ const Sidebar = () => {
 						>
 							<ListItemAvatar>
 								<Avatar
-									sx={{ width: 24, height: 24 }}
 									alt="Rene Wang"
 									src="https://avatars.githubusercontent.com/u/52880665?v=4"
 								/>
 							</ListItemAvatar>
 							<ListItemText
-								sx={{
-									"& .MuiListItemText-primary": {
-										fontFamily: "Product Sans",
-										textDecoration: "none",
-										color: "inherit",
-									},
-									"& .MuiListItemText-secondary": {
-										textDecoration: "none",
-										color: "inherit",
-									},
-								}}
 								primary={<Text k="navbar.copyright.title" />}
-								secondary={
-									<Text k="navbar.copyright.subtitle" />
-								}
 							/>
 						</ListItem>
 					</a>
