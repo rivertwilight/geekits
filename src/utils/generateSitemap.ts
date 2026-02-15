@@ -10,11 +10,6 @@ const generateSitemap = (apps) => {
 			changefreq: "daily",
 			priority: 1.0,
 		},
-		{
-			url: "/about",
-			changefreq: "daily",
-			priority: 0.8,
-		},
 		...apps,
 	];
 

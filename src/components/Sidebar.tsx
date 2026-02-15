@@ -163,11 +163,6 @@ const Sidebar = () => {
 			href: "/about",
 		},
 		{
-			Icon: <InfoOutlinedIcon />,
-			text: <Text k="navbar.about" />,
-			href: "/about",
-		},
-		{
 			Icon: <GitHubIcon />,
 			text: "GitHub",
 			href: repo,
