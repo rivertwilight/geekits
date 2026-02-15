@@ -144,7 +144,7 @@ const DONATION_HISTORY = [
 ];
 
 const stripePromise = loadStripe(
-	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
 );
 
 const ProductItem = ({ href, ...props }) => (
@@ -166,7 +166,10 @@ const ProductItem = ({ href, ...props }) => (
 				<Typography variant="h5" component="div">
 					{props.price}
 				</Typography>
-				<Typography sx={{ height: { xs: "4em", sm: "2em" } }} variant="body2">
+				<Typography
+					sx={{ height: { xs: "4em", sm: "2em" } }}
+					variant="body2"
+				>
 					{props.subtitles}
 				</Typography>
 			</CardContent>
@@ -192,7 +195,7 @@ const PaidOptionItem = ({ href, ...props }) => {
 	const [open, setOpen] = useState(false);
 	const [paymentIntent, setPaymentIntent] = useState(null);
 	const [expandedAccordion, setExpandedAccordion] = useState<string | false>(
-		"gumroad"
+		"gumroad",
 	);
 
 	const handleClick = () => {
@@ -205,7 +208,8 @@ const PaidOptionItem = ({ href, ...props }) => {
 	};
 
 	const handleAccordionChange =
-		(panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+		(panel: string) =>
+		(event: React.SyntheticEvent, isExpanded: boolean) => {
 			setExpandedAccordion(isExpanded ? panel : false);
 		};
 
@@ -242,7 +246,10 @@ const PaidOptionItem = ({ href, ...props }) => {
 							<Avatar>{props.icon}</Avatar>
 						</ListItemAvatar>
 						{!!props.tag ? (
-							<ListItemText primary={props.title} secondary={props.tag} />
+							<ListItemText
+								primary={props.title}
+								secondary={props.tag}
+							/>
 						) : (
 							<ListItemText primary={props.title} />
 						)}
@@ -400,11 +407,7 @@ const StripePaymentForm = () => {
 	);
 };
 
-export default function DonateClient({
-	currentPage,
-}: {
-	currentPage: any;
-}) {
+export default function DonateClient({ currentPage }: { currentPage: any }) {
 	usePageTitle(currentPage.title);
 
 	return (
@@ -478,13 +481,11 @@ export default function DonateClient({
 					</Button>
 				</Box>
 			</TableContainer>
-			<Box height="200px">
-				<Placeholder illustrationUrl="/illustration/undraw_fatherhood_-7-i19.svg" />
-			</Box>
+			<Box height="56px"></Box>
 
 			<Typography variant="body2" textAlign="center" gutterBottom>
 				感谢您对我的开源项目的关注。Toolkits
-				已经开发了五年多，这期间我投入了大量的时间、精力和金钱，包括购买域名和服务器。这一切对我来说是非常昂贵的。但是，我仍然坚守着对这个项目的热爱。
+				已经开发了六年多，这期间我投入了大量的时间、精力和金钱，包括购买域名和服务器。这一切对我来说是非常昂贵的。但是，我仍然坚守着对这个项目的热爱。
 				你可以通过捐赠来支持我，帮助我继续开发这个项目，使其对更多人有所帮助。非常感谢你的支持！
 				<br />
 				<br />
