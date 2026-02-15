@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Avatar from "@mui/material/Avatar";
@@ -30,6 +30,7 @@ import { ListItemButton, Theme, useMediaQuery } from "@mui/material";
 import { useSidebar } from "@/contexts/sidebar";
 import Text from "./i18n";
 import { isIOS, isWeb } from "@/utils/platform";
+import fiv from "@/utils/Services/fiv";
 
 const drawerWidth = 260;
 
@@ -103,7 +104,7 @@ const LinkWrapper = ({
 				className={isActive ? "Mui-selected" : ""}
 				key={href}
 			>
-				<ListItemIcon>{Icon}</ListItemIcon>
+				{Icon && <ListItemIcon>{Icon}</ListItemIcon>}
 				<ListItemText
 					primary={text}
 					sx={{
@@ -129,6 +130,14 @@ const Sidebar = () => {
 	const downXs = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("md"),
 	);
+
+	const [bookmarks, setBookmarks] = useState<{ link: string; name: string }[]>(
+		[],
+	);
+
+	useEffect(() => {
+		setBookmarks(fiv.getAll());
+	}, []);
 
 	const handleClickNavItem = () => {
 		if (downXs) {
@@ -174,6 +183,27 @@ const Sidebar = () => {
 			href: releaseNotesUrl,
 			isExternal: true,
 		},
+		...(bookmarks.length > 0
+			? [
+					{
+						Icon: null,
+						text: "<divider />",
+						href: "#bookmarks",
+					},
+					...bookmarks.map((app) => ({
+						Icon: null,
+						text: app.name,
+						href: `/app/${app.link}`,
+						sx: {
+							"& .MuiListItemText-primary": {
+								whiteSpace: "nowrap",
+								overflow: "hidden",
+								textOverflow: "ellipsis",
+							},
+						},
+					})),
+				]
+			: []),
 	];
 
 	const drawer = (

@@ -1,12 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import AppList from "@/components/AppGallery";
 import Search from "@/components/SearchBox";
-import Tips from "@/components/Tips";
-import Bookmark from "@/components/Bookmark";
+
 import channelInfo from "@/data/channelInfo";
 import { useLocale } from "@/contexts/locale";
 import { Theme, useMediaQuery } from "@mui/material";
@@ -48,24 +46,10 @@ export default function HomePageClient({
 						xs: 12,
 					}}
 				>
-					<Bookmark />
-				</Grid>
-				<Grid
-					size={{
-						xs: 12,
-					}}
-				>
 					<AppList
 						channelInfo={channelInfo}
 						appData={localizedAppData}
 					/>
-				</Grid>
-				<Grid
-					size={{
-						xs: 12,
-					}}
-				>
-					<Tips />
 				</Grid>
 			</Grid>
 		</MainSection>
