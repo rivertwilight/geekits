@@ -145,6 +145,9 @@ const appImportList: Record<string, ComponentType> = {
 	card_game_scorer: dynamic(() => import("../apps/card_game_scorer"), {
 		ssr: false,
 	}),
+	metar_decoder: dynamic(() => import("../apps/metar_decoder"), {
+		ssr: false,
+	}),
 };
 
 export default appImportList;
