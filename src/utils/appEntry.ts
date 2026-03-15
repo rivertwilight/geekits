@@ -148,6 +148,15 @@ const appImportList: Record<string, ComponentType> = {
 	metar_decoder: dynamic(() => import("../apps/metar_decoder"), {
 		ssr: false,
 	}),
+	json_formatter: dynamic(() => import("../apps/json_formatter"), {
+		ssr: false,
+	}),
+	password_generator: dynamic(() => import("../apps/password_generator"), {
+		ssr: false,
+	}),
+	hash_generator: dynamic(() => import("../apps/hash_generator"), {
+		ssr: false,
+	}),
 };
 
 export default appImportList;
